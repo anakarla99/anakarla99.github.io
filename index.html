@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ana Caballero — Full Stack Engineer & ML Researcher</title>
+<meta name="description" content="Full Stack Engineer and ML Researcher based in Barcelona. React, TypeScript, Python, PyTorch, .NET.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0f0f0f;
+    --gray-900: #1a1a1a;
+    --gray-600: #555;
+    --gray-400: #999;
+    --gray-200: #e8e8e8;
+    --gray-100: #f5f5f3;
+    --white: #fefefe;
+    --accent: #1a1a1a;
+    --accent-light: #f0ede8;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(254,254,254,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--black);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--gray-600);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 6rem 3rem 4rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .hero-inner { max-width: 720px; }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--gray-400);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--gray-400);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gray-600);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
+    font-family: var(--sans);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    background: var(--black);
+    color: var(--white);
+    border: 1px solid var(--black);
+  }
+  .btn-primary:hover { background: var(--gray-900); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--black);
+    border: 1px solid var(--gray-200);
+  }
+  .btn-secondary:hover { border-color: var(--black); }
+  .hero-scroll {
+    margin-top: 5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--gray-400); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .hero-scroll::after {
+    content: '';
+    display: block; width: 1px; height: 48px;
+    background: var(--gray-400);
+    animation: scrollline 2s ease-in-out infinite;
+  }
+  @keyframes scrollline {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.4); opacity: 0.4; }
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--gray-400);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; max-width: 60px; height: 1px;
+    background: var(--gray-200);
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--black);
+    margin-bottom: 1rem;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--gray-600); font-weight: 300; margin-bottom: 1rem; font-size: 1.02rem; }
+  .about-facts { display: flex; flex-direction: column; gap: 0; }
+  .fact {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 0.9rem;
+  }
+  .fact:first-child { border-top: 1px solid var(--gray-200); }
+  .fact-label { color: var(--gray-400); font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .fact-value { color: var(--black); font-weight: 400; text-align: right; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; }
+  .skill-group {
+    padding: 2rem;
+    border: 1px solid var(--gray-200);
+    margin: -1px 0 0 -1px;
+  }
+  .skill-group-title {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-400);
+    margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--gray-100);
+    color: var(--gray-600);
+    border-radius: 2px;
+    font-family: var(--mono);
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .exp-item:first-child { border-top: 1px solid var(--gray-200); }
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-top: 0.2rem;
+  }
+  .exp-role { font-weight: 500; font-size: 1rem; color: var(--black); margin-bottom: 0.2rem; }
+  .exp-company { font-size: 0.9rem; color: var(--gray-600); margin-bottom: 0.75rem; }
+  .exp-desc { font-size: 0.9rem; color: var(--gray-600); font-weight: 300; line-height: 1.6; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    border: 1px solid var(--gray-200);
+    padding: 2rem;
+    border-radius: 2px;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  .project-card:hover { border-color: var(--black); transform: translateY(-2px); }
+  .project-type {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    margin-bottom: 0.75rem;
+  }
+  .project-title { font-family: var(--serif); font-size: 1.25rem; color: var(--black); margin-bottom: 0.5rem; line-height: 1.2; }
+  .project-desc { font-size: 0.875rem; color: var(--gray-600); font-weight: 300; line-height: 1.6; margin-bottom: 1.25rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--gray-200);
+    color: var(--gray-600);
+    border-radius: 2px;
+  }
+  .project-card.featured {
+    background: var(--gray-100);
+    border-color: transparent;
+    grid-column: span 2;
+  }
+  .project-card.featured .project-title { font-size: 1.5rem; }
+
+  /* CONTACT */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .contact-text p { color: var(--gray-600); font-weight: 300; font-size: 1.02rem; line-height: 1.75; }
+  .contact-links { display: flex; flex-direction: column; gap: 0; }
+  .contact-link {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--gray-200);
+    text-decoration: none;
+    color: var(--black);
+    transition: padding-left 0.2s;
+    font-size: 0.9rem;
+  }
+  .contact-link:first-child { border-top: 1px solid var(--gray-200); }
+  .contact-link:hover { padding-left: 0.5rem; }
+  .contact-link-label { font-weight: 500; }
+  .contact-link-url { font-family: var(--mono); font-size: 0.78rem; color: var(--gray-400); }
+  .contact-link-arrow { color: var(--gray-400); transition: transform 0.2s; }
+  .contact-link:hover .contact-link-arrow { transform: translate(3px, -3px); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gray-200);
+    padding: 2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem;
+    color: var(--gray-400);
+    font-family: var(--mono);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* DIVIDER */
+  .full-divider { border: none; border-top: 1px solid var(--gray-200); margin: 0; }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { padding: 5rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.25rem; }
+    .project-card.featured { grid-column: span 1; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Ana Caballero</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Based in Barcelona, Spain</div>
+    <h1>Full Stack Engineer<br><em>&amp; ML Researcher</em></h1>
+    <p class="hero-sub">
+      I build scalable web applications and production-grade machine learning systems —
+      from React &amp; TypeScript frontends to deep learning pipelines for medical and satellite imagery.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-secondary">Get in touch</a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </div>
+</div>
+
+<hr class="full-divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <h2>Building things that work,<br><em>at scale.</em></h2>
+      <br>
+      <p>
+        I'm a computer scientist with a deep interest in both the engineering side — APIs, frontends, data pipelines — and the research side — algorithms, optimization, and machine learning.
+      </p>
+      <p>
+        I graduated with Honours in Computer Science from the University of Havana, where my thesis focused on deep learning models for medical image segmentation. I'm currently pursuing an M.Sc. in Data Processing at Harbour.Space University in Barcelona.
+      </p>
+      <p>
+        I speak Spanish (native), English (professional), Italian and German (working proficiency).
+      </p>
+    </div>
+    <div class="about-facts">
+      <div class="fact"><span class="fact-label">Location</span><span class="fact-value">Barcelona, Spain</span></div>
+      <div class="fact"><span class="fact-label">Education</span><span class="fact-value">M.Sc. Data Processing<br>Harbour.Space, Barcelona</span></div>
+      <div class="fact"><span class="fact-label">Background</span><span class="fact-value">B.Sc. CS Honours<br>University of Havana</span></div>
+      <div class="fact"><span class="fact-label">Focus</span><span class="fact-value">Full Stack · ML · Data</span></div>
+      <div class="fact"><span class="fact-label">Status</span><span class="fact-value">Open to opportunities</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Skills</div>
+  <h2 style="margin-bottom:2.5rem;">Tech stack</h2>
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag">Haskell</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">ML & Data Science</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PyTorch</span>
+        <span class="skill-tag">Scikit-Learn</span>
+        <span class="skill-tag">Image Segmentation</span>
+        <span class="skill-tag">Metaheuristics</span>
+        <span class="skill-tag">AI Planning</span>
+        <span class="skill-tag">Feature Engineering</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Redux</span>
+        <span class="skill-tag">Blazor</span>
+        <span class="skill-tag">Webpack</span>
+        <span class="skill-tag">Vite</span>
+        <span class="skill-tag">Bootstrap</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend & Infra</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Django</span>
+        <span class="skill-tag">ASP.NET Core</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">ZMQ</span>
+        <span class="skill-tag">Sockets</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <h2 style="margin-bottom:2.5rem;">Where I've worked</h2>
+  <div class="exp-list fade-in">
+    <div class="exp-item">
+      <div class="exp-date">Aug 2025 – Mar 2026</div>
+      <div>
+        <div class="exp-role">Full Stack Engineer</div>
+        <div class="exp-company">Iberant Solutions S.L. — Barcelona, Spain</div>
+        <div class="exp-desc">Built and maintained production web applications using React, TypeScript and .NET. Owned frontend architecture and backend API design end-to-end, improving core business workflows and reducing manual processing time.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Jun – Nov 2025</div>
+      <div>
+        <div class="exp-role">Backend Developer</div>
+        <div class="exp-company">Enjoy Travel Group — Havana, Cuba</div>
+        <div class="exp-desc">Designed server-side logic and relational database schemas for a travel services platform handling real-time bookings. Developed and secured RESTful APIs consumed by frontends and third-party integrations.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Jan – Apr 2025</div>
+      <div>
+        <div class="exp-role">Software Developer</div>
+        <div class="exp-company">NUFOR — Cuba</div>
+        <div class="exp-desc">Built enterprise automation tools with Python and Django, eliminating manual processes. Led RESTful API development and integration with external data providers.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Jan – Feb 2024</div>
+      <div>
+        <div class="exp-role">Software Developer</div>
+        <div class="exp-company">Aircros — Cuba</div>
+        <div class="exp-desc">Developed responsive, component-driven UIs with React and TypeScript. Participated in agile sprints and QA cycles.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <h2 style="margin-bottom:2.5rem;">Selected work</h2>
+  <div class="projects-grid fade-in">
+
+    <a href="https://github.com/anakarla99/Simulation_IA_Project" target="_blank" class="project-card featured">
+      <div class="project-type">ML · Multi-agent Systems · Research</div>
+      <div class="project-title">Urban Mobility Simulation — Havana</div>
+      <div class="project-desc">Multi-agent simulation of Havana's public transport network estimating population distribution across municipalities over 24 hours. Applied Simulated Annealing for stop assignment, Ant Colony Optimization for route planning, and AI Planning for automated company decision-making. Integrated real geospatial data via OpenStreetMap and demographic data from ONEI Cuba.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">ACO</span>
+        <span class="project-tag">Simulated Annealing</span>
+        <span class="project-tag">AI Planning</span>
+        <span class="project-tag">OpenStreetMap</span>
+        <span class="project-tag">Multi-agent</span>
+      </div>
+    </a>
+
+    <div class="project-card">
+      <div class="project-type">ML · Deep Learning · Thesis</div>
+      <div class="project-title">Skin Lesion Metadata Segmentation</div>
+      <div class="project-desc">Deep learning models (PyTorch) to automatically extract structured metadata from dermoscopic image datasets, supporting medical diagnostics pipelines. University of Havana — Graduated with Honours.</div>
+      <div class="project-tags">
+        <span class="project-tag">PyTorch</span>
+        <span class="project-tag">Image Segmentation</span>
+        <span class="project-tag">Medical Imaging</span>
+        <span class="project-tag">Deep Learning</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">ML · Computer Vision</div>
+      <div class="project-title">Satellite Image Segmentation</div>
+      <div class="project-desc">End-to-end pipeline to segment tree coverage in Cuba from satellite imagery — data preprocessing, model selection with Scikit-Learn and PyTorch, and large-scale evaluation.</div>
+      <div class="project-tags">
+        <span class="project-tag">PyTorch</span>
+        <span class="project-tag">Scikit-Learn</span>
+        <span class="project-tag">Computer Vision</span>
+        <span class="project-tag">Remote Sensing</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Full Stack · Web</div>
+      <div class="project-title">Travel Agency Platform</div>
+      <div class="project-desc">Complete web platform with booking flows, admin dashboards and a full REST API layer built with C#, ASP.NET Core, SQLite and Entity Framework.</div>
+      <div class="project-tags">
+        <span class="project-tag">C#</span>
+        <span class="project-tag">ASP.NET Core</span>
+        <span class="project-tag">SQLite</span>
+        <span class="project-tag">Entity Framework</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Distributed Systems</div>
+      <div class="project-title">Tournament Emulator</div>
+      <div class="project-desc">Python-based distributed system using the Chord DHT protocol over Sockets and ZMQ — low-level network programming with fault-tolerant design.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Chord DHT</span>
+        <span class="project-tag">ZMQ</span>
+        <span class="project-tag">Sockets</span>
+      </div>
+    </div>
+
+    <a href="https://github.com/anakarla99/discrete_maths" target="_blank" class="project-card">
+      <div class="project-type">Algorithms · Mathematics</div>
+      <div class="project-title">Discrete Mathematics Solver</div>
+      <div class="project-desc">Python solutions for combinatorics and number theory problems, each verified with a brute-force stress tester running 30 randomized rounds.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Combinatorics</span>
+        <span class="project-tag">Number Theory</span>
+        <span class="project-tag">Algorithms</span>
+      </div>
+    </a>
+
+    <div class="project-card">
+      <div class="project-type">Compilers · DSL</div>
+      <div class="project-title">2D Geometry DSL Compiler</div>
+      <div class="project-desc">Python compiler for a Domain-Specific Language modelling 2D geometric formations — lexing, parsing, AST construction and code generation from scratch.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Compilers</span>
+        <span class="project-tag">AST</span>
+        <span class="project-tag">DSL Design</span>
+      </div>
+    </div>
+
+    <a href="https://github.com/anakarla99/Snake" target="_blank" class="project-card">
+      <div class="project-type">Game Development · C#</div>
+      <div class="project-title">Snake Game</div>
+      <div class="project-desc">Classic Snake in C# with Windows Forms — custom world editor, Lee algorithm-based board validator ensuring connectivity, and score tracking.</div>
+      <div class="project-tags">
+        <span class="project-tag">C#</span>
+        <span class="project-tag">.NET</span>
+        <span class="project-tag">Graph Algorithms</span>
+        <span class="project-tag">Lee Algorithm</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-inner fade-in">
+    <div class="contact-text">
+      <h2>Let's work<br><em>together.</em></h2>
+      <br>
+      <p>I'm currently open to full-time engineering roles in Barcelona or remote — particularly in full stack, backend, or ML/data engineering. Feel free to reach out for opportunities, collaborations, or just a conversation about algorithms.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:caballeroanakarla@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-url">caballeroanakarla@gmail.com</span>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/ana-karla-caballero-84922a15a" target="_blank" class="contact-link">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-url">ana-karla-caballero</span>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+      <a href="https://github.com/anakarla99" target="_blank" class="contact-link">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-url">github.com/anakarla99</span>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Ana Caballero © 2026</span>
+  <span>Barcelona, Spain</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
